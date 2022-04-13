@@ -6,9 +6,11 @@ import (
 	"time"
 
 	"github.com/amatute/go-playground/concurrency/database"
+	"github.com/amatute/go-playground/concurrency/prices"
 	"github.com/amatute/go-playground/concurrency/prices/repository"
 	"github.com/google/uuid"
 	"github.com/joho/godotenv"
+	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/sqlserver"
 	"gorm.io/gorm"
@@ -17,10 +19,16 @@ import (
 func main() {
 	loadConfig()
 	database.DBConn = initDatabase()
-
 	database.DBConn.AutoMigrate(&repository.Price{})
-
 	// seedTestDatadb() TODO: fill the database with prices
+
+	repo := repository.NewRepository(database.DBConn)
+	service := prices.NewService(repo)
+
+	err := service.ReadData()
+	if err != nil {
+		logrus.Error("error reading data from price service 😑")
+	}
 
 	fmt.Println("we are ready to Go! ✅")
 }
