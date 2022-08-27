@@ -7,7 +7,7 @@ import (
 
 /*
  Links from YouTube tutorials:
- Maria Carrion: https://www.youtube.com/watch?v=x6vBvgKGvxU
+ Mario Carrion: https://www.youtube.com/watch?v=x6vBvgKGvxU
  Katan Coding:  https://www.youtube.com/watch?v=qyM8Pi1KiiM
  Golang Cafe:   https://www.youtube.com/watch?v=rlPbtzBmHp8&list=PLlhUYfyFOzo2QTD5z4LUwd13-_9Pwh028
  https://www.youtube.com/watch?v=245QljYu3-A
@@ -110,7 +110,7 @@ func DoReport(stores <-chan []Store) <-chan Report {
 		for chunk := range stores {
 			// do heavy lifting
 			for _, s := range chunk {
-				time.Sleep(time.Millisecond * 250)
+				time.Sleep(time.Millisecond * 100)
 				out <- Report{storeNbr: s.number, productNumber: "PROD_100", priceEcommerce: "5990", priceLocal: "9990"}
 			}
 		}

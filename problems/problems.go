@@ -1,5 +1,6 @@
 package problems
 
+// 13. Roman to Integer
 func RomanToInt(s string) int {
 	number := []string{}
 	for _, c := range s {
@@ -56,13 +57,13 @@ func getValue(s string) int {
 	}
 }
 
-
+// 1. Two Sum
 func TwoSum(nums []int, target int) []int {
 	output := []int{}
 	numsMap := map[int]int{}
-  
+
 	for i, n := range nums {
-		numsMap[n] = i 
+		numsMap[n] = i
 	}
 
 	for i, n := range nums {
@@ -76,4 +77,20 @@ func TwoSum(nums []int, target int) []int {
 	}
 
 	return output
+}
+
+// 724. Find Pivot Index
+func PivotIndex(nums []int) int {
+	leftSum := 0
+	sum := 0
+	for _, v := range nums {
+		sum += v
+	}
+	for i := 0; i < len(nums); i++ {
+		if leftSum == sum - leftSum - nums[i] {
+			return i
+		}
+		leftSum += nums[i]
+	}
+	return -1
 }

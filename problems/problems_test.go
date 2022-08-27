@@ -36,7 +36,6 @@ func TestRomanToInt(t *testing.T) {
 }
 
 func TestTwoSum(t *testing.T) {
-
 	assertOutput := func(want, output []int) {
 		for i := 0; i < len(want); i++ {
 			if want[i] != output[i] {
@@ -60,5 +59,40 @@ func TestTwoSum(t *testing.T) {
 		assertOutput(want, output)
 
 	})
+}
+
+func TestPivotIndex(t *testing.T) {
+
+	tests := []struct{
+		in []int
+		want int
+	}{
+		{
+			[]int{1,7,3,6,5,6},
+			3,
+		},
+		{
+			[]int{1,2,3},
+			-1,
+		},
+		{
+			[]int{2,1,-1},
+			0,
+		},
+	}
+
+	assertOutput := func(want, ans int) {
+		if want != ans {
+			t.Errorf("want %d got %d", want, ans)
+		}
+	}
+
+	for _, tt := range tests {
+		t.Run("It should return the pivot index of the array", func(t *testing.T) {
+			ans := PivotIndex(tt.in)
+			assertOutput(tt.want, ans)
+		})
+	}
 	
+
 }
